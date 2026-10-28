@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wjy4m2lejh4g"
-path="res://.godot/imported/death.png-94601973f5abbdf6f0b69acc27bde281.ctex"
+uid="uid://gymqyqhah4l8"
+path="res://.godot/imported/Landed (32 x 32).png-94071ceea8d1c7f7b3615aa5cd635606.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://design/death.png"
-dest_files=["res://.godot/imported/death.png-94601973f5abbdf6f0b69acc27bde281.ctex"]
+source_file="res://design/3 - Skeleton/Landed (32 x 32).png"
+dest_files=["res://.godot/imported/Landed (32 x 32).png-94071ceea8d1c7f7b3615aa5cd635606.ctex"]
 
 [params]
 
