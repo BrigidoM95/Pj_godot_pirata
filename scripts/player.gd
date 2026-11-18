@@ -9,6 +9,7 @@ enum PlayerState {
 	death
 }
 
+@onready var label_vida: Label = $CanvasLayer/LabelVida
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var area_golpe: Area2D = $AreaGolpe
@@ -17,6 +18,7 @@ enum PlayerState {
 @export var velocidade: float = 70.0
 @export var vida_maxima: int = 5
 @export var tempo_hurt: float = 0.4
+@export var duracao_invulnerabilidade: float = 1.0
 @export var dano_do_golpe: int = 2
 @export var quadro_do_golpe: int = 3
 @export var distancia_golpe: float = 24.0
@@ -24,15 +26,23 @@ enum PlayerState {
 var vida: int
 var status: PlayerState
 var tempo_no_hurt: float = 0.0
+var tempo_invulneravel: float = 0.0
 var golpe_aplicado: bool = false
 
 var direcao: Vector2 = Vector2.ZERO
 var ultima_direcao: Vector2 = Vector2.DOWN
 var direcao_ataque: Vector2 = Vector2.DOWN
+var tempo_piscar: float = 0.0
+var jogador_visivel: bool = true
 
 
 func _ready() -> void:
 	vida = vida_maxima
+	atualizar_hud_vida()
+
+	if not is_in_group("jogador"):
+		add_to_group("jogador")
+
 	area_golpe.monitoring = false
 
 	if forma_golpe.shape is CircleShape2D:
@@ -43,6 +53,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if tempo_invulneravel > 0.0:
+		tempo_invulneravel = maxf(0.0, tempo_invulneravel - delta)
+		atualizar_piscar(delta)
+	else:
+		anim.visible = true
+		jogador_visivel = true
+
 	if status == PlayerState.death:
 		velocity = Vector2.ZERO
 		return
@@ -147,14 +164,9 @@ func attack_state() -> void:
 		golpe_aplicado = true
 
 		var corpos := area_golpe.get_overlapping_bodies()
-		print("Ataque: ", nome_animacao)
-		print("Corpos detectados: ", corpos.size())
 
 		for corpo in corpos:
-			print("Corpo detectado: ", corpo.name)
-
 			if corpo != self and corpo.has_method("levar_dano"):
-				print("Aplicando dano: ", corpo.name)
 				corpo.levar_dano(dano_do_golpe)
 
 	if anim.frame >= quantidade_frames - 1:
@@ -217,13 +229,20 @@ func go_to_hurt_state() -> void:
 	status = PlayerState.hurt
 	tempo_no_hurt = 0.0
 	velocity = Vector2.ZERO
-	anim.modulate = Color(1, 0.4, 0.4)
+
+	tempo_piscar = 0.0
+	jogador_visivel = true
+	anim.visible = true
+	anim.modulate = Color.WHITE
+
 	area_golpe.set_deferred("monitoring", false)
+
 	anim.play("hurt")
 
 
+
 func levar_dano(quantidade: int) -> void:
-	if status == PlayerState.hurt:
+	if tempo_invulneravel > 0.0:
 		return
 
 	if status == PlayerState.attack:
@@ -233,10 +252,20 @@ func levar_dano(quantidade: int) -> void:
 		return
 
 	vida -= quantidade
+	atualizar_hud_vida()
+
+	tempo_invulneravel = duracao_invulnerabilidade
+
 	print("Vida do jogador: ", vida)
 
 	if vida <= 0:
 		morrer()
+
+		var cena_atual := get_tree().current_scene
+
+		if cena_atual != null and cena_atual.has_method("mostrar_derrota"):
+			cena_atual.call_deferred("mostrar_derrota")
+
 		return
 
 	go_to_hurt_state()
@@ -248,11 +277,34 @@ func morrer() -> void:
 
 	status = PlayerState.death
 	velocity = Vector2.ZERO
+
 	area_golpe.set_deferred("monitoring", false)
 	collision_shape.set_deferred("disabled", true)
+
 	anim.modulate = Color.WHITE
 	anim.play("death")
 
 
 func death_state() -> void:
 	velocity = Vector2.ZERO
+
+
+func atualizar_hud_vida() -> void:
+	var coracoes := ""
+
+	for i in range(vida_maxima):
+		if i < vida:
+			coracoes += "♥ "
+		else:
+			coracoes += "♡ "
+
+	label_vida.text = coracoes.strip_edges()
+	
+	
+func atualizar_piscar(delta: float) -> void:
+	tempo_piscar += delta
+
+	if tempo_piscar >= 0.1:
+		tempo_piscar = 0.0
+		jogador_visivel = not jogador_visivel
+		anim.visible = jogador_visivel

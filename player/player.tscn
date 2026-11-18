@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://x0t0lvj2kie0" path="res://design/pirata/at- dt2.png" id="3_qjkh3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvgpt"]
-radius = 5.0
-height = 16.0
+radius = 12.0
+height = 28.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7qer"]
 atlas = ExtResource("2_qjkh3")
@@ -57,6 +57,10 @@ region = Rect2(626, 0, 313, 313)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
 atlas = ExtResource("2_rkbax")
 region = Rect2(939, 0, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw77l"]
+atlas = ExtResource("2_yw30f")
+region = Rect2(0, 250, 182, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boad6"]
 atlas = ExtResource("2_rkbax")
@@ -175,6 +179,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_uw77l")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_boad6")
 }, {
@@ -229,23 +241,26 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2uef"]
 radius = 18.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_uvgpt"]
+font_size = 28
+font_color = Color(0.88291997, 4.4520943e-06, 8.663535e-07, 1)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=191187667 groups=["jogador"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_rkbax")
-vida_maxima = 10
 dano_do_golpe = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=683023404]
 shape = SubResource("CapsuleShape2D_uvgpt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1040547028]
-position = Vector2(-0.9999999, -0.9999999)
-scale = Vector2(0.0711901, 0.067995206)
+position = Vector2(1.9127734, 1.9116554)
+scale = Vector2(0.15480468, 0.12870678)
 sprite_frames = SubResource("SpriteFrames_8sdah")
-animation = &"attack_b"
+animation = &"hurt"
 
 [node name="AreaGolpe" type="Area2D" parent="." unique_id=1666617490]
 collision_layer = 2
@@ -253,3 +268,12 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaGolpe" unique_id=453478714]
 shape = SubResource("CircleShape2D_t2uef")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1051829861]
+
+[node name="LabelVida" type="Label" parent="CanvasLayer" unique_id=1157824763]
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 79.0
+label_settings = SubResource("LabelSettings_uvgpt")

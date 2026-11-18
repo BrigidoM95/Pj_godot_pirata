@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d1x1vpix43gcn"]
+
+[ext_resource type="Script" uid="uid://dxw4tgw7nupm6" path="res://scripts/tela_derrota.gd" id="1_ej5jo"]
+
+[node name="TelaDerrota" type="Control" unique_id=2126510345]
+z_index = -5
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_right = -50.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ej5jo")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=2106566312]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0.27058825, 1)
+
+[node name="Centralizar" type="CenterContainer" parent="Fundo" unique_id=530244745]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Painel" type="VBoxContainer" parent="Fundo/Centralizar" unique_id=338723166]
+propagate_maximum_size = false
+layout_mode = 2
+offset_transform_enabled = true
+alignment = 1
+
+[node name="Titulo" type="Label" parent="Fundo/Centralizar/Painel" unique_id=230512616]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mensagem" type="Label" parent="Fundo/Centralizar/Painel" unique_id=1037415787]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotaoNovamente" type="Button" parent="Fundo/Centralizar/Painel" unique_id=394029658]
+layout_mode = 2
+
+[node name="BotaoSair" type="Button" parent="Fundo/Centralizar/Painel" unique_id=1126769699]
+layout_mode = 2
