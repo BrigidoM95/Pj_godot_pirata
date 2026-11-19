@@ -1,4 +1,4 @@
-
+#Código feito por i.a
 extends CharacterBody2D
 
 enum PlayerState {

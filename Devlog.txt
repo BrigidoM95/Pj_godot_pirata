@@ -1,0 +1,33 @@
+#Aula 08 07/10
+Oque fiz: Criação do mapa visto de cima com o personagem andando nas 4 direções;
+Oque travou: Personagem atras do mapa; 
+Como resolvi: Mudei o indice z do mapa.
+
+#Aula 9 21/10 1° Commit
+Oque fiz: Implementação do dano e vida do personagem e inimigo para testes;
+Oque travou: código não funcionava o fator de dano e player não interagia com camada correta; 
+Como resolvi: Correção e ligação através de I.A.
+
+#Aula 10 28/10 2° Commit
+Oque fiz: Correção para o inimigo tema "esquelto" e funções de dano e 
+perseguição com maquina de estados e spawn deles com Marker2D e Timer;
+Oque travou: Inimigos travavam em paredes com colisão; 
+Como resolvi: Utilizei o NavigationRegion2D junto do NavigationAgent2D 
+atráves de passo a passo com i.a.
+
+#Aula 11 04/11
+Oque fiz: Mudança dos Sprites para tema pirata;
+Oque travou: Aplicar a colisão as barreiras do mapa; 
+Como resolvi: Mudei a forma de destacar o tile map, 
+onde cada quadrado tinha seu tamanho ajustado.
+
+#Aula 12 11/11
+Oque fiz: Implementação das condições de Vitória e Derrota e exportação para pagina no itch.io;
+Oque travou: Contagem de inimigos derrotados; 
+Como resolvi: correção do código por i.a.
+Link do site: https://bigsoft.itch.io/pirate-survive
+
+#Aula 13 18/11 3° Commit
+Oque fiz: Criação das telas de vitória e derrota;
+Oque travou: Botão de jogar novamente não reiniciava; 
+Como resolvi: Correção feita por i.a.

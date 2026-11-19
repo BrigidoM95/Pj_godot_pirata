@@ -1,7 +1,7 @@
-
+#Código feito por i.a
 extends Node2D
 
-@export var objetivo_abates: int = 1
+@export var objetivo_abates: int = 50
 @export var limite_inimigos_criados: int = 50
 
 const CENA_INIMIGO: PackedScene = preload("res://entidades/inimigo.tscn")

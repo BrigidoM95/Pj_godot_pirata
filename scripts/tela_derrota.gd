@@ -1,4 +1,4 @@
-
+#Código feito por i.a
 extends Control
 
 @onready var titulo: Label = $Fundo/Centralizar/Painel/Titulo

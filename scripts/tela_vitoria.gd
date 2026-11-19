@@ -1,3 +1,4 @@
+#Código feito por i.a
 extends Control
 
 func _ready() -> void:

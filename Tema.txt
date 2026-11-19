@@ -1,0 +1,4 @@
+Tema: Navio Pirata, capitão enfrentando esqueletos;
+Modo: Top-Down;
+Tipo: Abate;
+Objetivo: Derrotar 50 inimigos esqueletos.
